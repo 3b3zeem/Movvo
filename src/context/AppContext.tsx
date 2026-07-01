@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { getTMDBApiKey, saveTMDBApiKey } from "@/lib/tmdb";
 
 interface PlayerState {
@@ -29,6 +30,7 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
   const [apiKey, setApiKey] = useState<string>("");
   const [hasKey, setHasKey] = useState<boolean>(false);
   const [activeMedia, setActiveMedia] = useState<{ type: "movie" | "tv"; id: number } | null>(null);
@@ -48,7 +50,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   };
 
   const openDetails = (type: "movie" | "tv", id: number) => {
-    setActiveMedia({ type, id });
+    router.push(`/${type === "movie" ? "movies" : "tv"}/${id}`);
   };
 
   const closeDetails = () => {

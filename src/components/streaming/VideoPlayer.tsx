@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X, Server, RefreshCw } from "lucide-react";
 
 interface VideoPlayerProps {
@@ -45,6 +45,21 @@ export default function VideoPlayer({
       iframe.src = getIframeUrl();
     }
   };
+
+  // Prevent iframe from redirecting the parent window on mobile/small screens
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      const message = "Are you sure you want to leave? Your video playback might be interrupted.";
+      e.preventDefault();
+      e.returnValue = message;
+      return message;
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <div className="fixed inset-0 z-50 bg-zinc-950 flex flex-col justify-between animate-fade-in delay-0">
