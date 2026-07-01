@@ -124,33 +124,6 @@ export default function SettingsPage() {
           </div>
         </div>
       </div>
-
-      {/* System Information */}
-      <div className="bg-zinc-900/20 border border-zinc-900 rounded-3xl p-6 md:p-8 space-y-4">
-        <h3 className="text-sm font-bold text-zinc-200 flex items-center gap-2 border-b border-zinc-850 pb-3">
-          <HardDrive className="w-4 h-4 text-blue-400" />
-          Technical Details
-        </h3>
-
-        <div className="grid grid-cols-2 gap-4 text-xs text-zinc-400">
-          <div>
-            <span className="block text-zinc-500 font-semibold mb-0.5">Platform Version</span>
-            <span className="text-zinc-300 font-medium">v1.0.0 (Production-Ready)</span>
-          </div>
-          <div>
-            <span className="block text-zinc-500 font-semibold mb-0.5">Framework</span>
-            <span className="text-zinc-300 font-medium">Next.js 16 (App Router)</span>
-          </div>
-          <div>
-            <span className="block text-zinc-500 font-semibold mb-0.5">Styling Architecture</span>
-            <span className="text-zinc-300 font-medium">Tailwind CSS v4 (CSS-first)</span>
-          </div>
-          <div>
-            <span className="block text-zinc-500 font-semibold mb-0.5">API Integration</span>
-            <span className="text-zinc-300 font-medium">TMDB API (v3 client-side)</span>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
