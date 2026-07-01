@@ -195,6 +195,15 @@ export const tmdb = {
     );
   },
 
+  // Get recommendations for a media item
+  getRecommendations: async (
+    type: "movie" | "tv",
+    id: number | string,
+    page = 1,
+  ): Promise<{ results: MediaItem[] }> => {
+    return tmdbFetch<{ results: MediaItem[] }>(`/${type}/${id}/recommendations`, { page });
+  },
+
   // Discover Media (flexible filtering)
   discover: async (
     type: "movie" | "tv",

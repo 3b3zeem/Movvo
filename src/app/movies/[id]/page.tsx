@@ -50,12 +50,14 @@ export default async function MovieDetailsPage({ params }: Props) {
   const id = Number(rawId.split("-")[0]);
 
   try {
-    const [details, credits] = await Promise.all([
+    const [details, credits, recommendationsData] = await Promise.all([
       tmdb.getDetails("movie", id),
       tmdb.getCredits("movie", id),
+      tmdb.getRecommendations("movie", id),
     ]);
 
     const cast = credits.cast.slice(0, 10);
+    const recommendations = recommendationsData.results || [];
 
     return (
       <MovieDetailsClient
@@ -63,6 +65,7 @@ export default async function MovieDetailsPage({ params }: Props) {
         rawId={rawId}
         initialDetails={details}
         initialCast={cast}
+        initialRecommendations={recommendations}
       />
     );
   } catch (error: any) {

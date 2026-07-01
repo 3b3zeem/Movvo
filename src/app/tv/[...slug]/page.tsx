@@ -76,12 +76,14 @@ export default async function TVShowDetailsPage({ params }: Props) {
   const id = Number(rawSeriesId.split("-")[0]);
 
   try {
-    const [details, credits] = await Promise.all([
+    const [details, credits, recommendationsData] = await Promise.all([
       tmdb.getDetails("tv", id),
       tmdb.getCredits("tv", id),
+      tmdb.getRecommendations("tv", id),
     ]);
 
     const cast = credits.cast.slice(0, 10);
+    const recommendations = recommendationsData.results || [];
 
     // Load initial episodes
     let initialSelectedSeason = 1;
@@ -122,6 +124,7 @@ export default async function TVShowDetailsPage({ params }: Props) {
         initialSelectedSeason={initialSelectedSeason}
         initialActiveEpisode={initialActiveEpisode}
         initialIsPlaying={initialIsPlaying}
+        initialRecommendations={recommendations}
       />
     );
   } catch (error: any) {

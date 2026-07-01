@@ -66,8 +66,12 @@ export default function MediaRow({ title, items, type }: MediaRowProps) {
         {/* Left Scroll Button */}
         {showLeftBtn && (
           <button
-            onClick={() => scroll("left")}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-zinc-950/80 border border-zinc-800 text-zinc-400 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 ml-2 cursor-pointer"
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              scroll("left");
+            }}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-zinc-950/80 border border-zinc-800 text-zinc-400 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 ml-2 cursor-pointer"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
@@ -76,8 +80,12 @@ export default function MediaRow({ title, items, type }: MediaRowProps) {
         {/* Right Scroll Button */}
         {showRightBtn && (
           <button
-            onClick={() => scroll("right")}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-zinc-950/80 border border-zinc-800 text-zinc-400 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 mr-2 cursor-pointer"
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              scroll("right");
+            }}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-zinc-950/80 border border-zinc-800 text-zinc-400 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 mr-2 cursor-pointer"
           >
             <ChevronRight className="w-5 h-5" />
           </button>

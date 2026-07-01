@@ -21,8 +21,10 @@ import {
   CastMember,
   Episode,
   getTMDBImageUrl,
+  MediaItem,
 } from "@/lib/tmdb";
 import { useWatchlist } from "@/hooks/useWatchlist";
+import MediaRow from "@/components/streaming/MediaRow";
 
 interface TVDetailsClientProps {
   id: number;
@@ -33,6 +35,7 @@ interface TVDetailsClientProps {
   initialSelectedSeason: number;
   initialActiveEpisode: { season: number; episode: number } | null;
   initialIsPlaying: boolean;
+  initialRecommendations: MediaItem[];
 }
 
 export default function TVDetailsClient({
@@ -44,6 +47,7 @@ export default function TVDetailsClient({
   initialSelectedSeason,
   initialActiveEpisode,
   initialIsPlaying,
+  initialRecommendations,
 }: TVDetailsClientProps) {
   const router = useRouter();
   const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
@@ -742,6 +746,17 @@ export default function TVDetailsClient({
               )}
             </div>
           )}
+        </div>
+      )}
+
+      {/* Recommendations / Related Media */}
+      {initialRecommendations && initialRecommendations.length > 0 && (
+        <div className="border-t border-zinc-900 pt-8 -mx-4 sm:-mx-6 md:-mx-8">
+          <MediaRow
+            title="Recommended For You"
+            items={initialRecommendations}
+            type="tv"
+          />
         </div>
       )}
     </div>

@@ -12,7 +12,7 @@ interface VideoPlayerProps {
   onClose: () => void;
 }
 
-type ServerType = "vidsrc" | "vidsrccc";
+type ServerType = "vidsrc" | "vidsrccc" | "vidsrcxyz" | "embedsu";
 
 export default function VideoPlayer({
   type,
@@ -27,14 +27,25 @@ export default function VideoPlayer({
 
   // Generate Iframe URLs based on active server
   const getIframeUrl = () => {
-    if (server === "vidsrc") {
-      return type === "movie"
-        ? `https://vidsrc.to/embed/movie/${id}`
-        : `https://vidsrc.to/embed/tv/${id}/${season}/${episode}`;
-    } else {
-      return type === "movie"
-        ? `https://vidsrc.cc/v2/embed/movie/${id}`
-        : `https://vidsrc.cc/v2/embed/tv/${id}/${season}/${episode}`;
+    switch (server) {
+      case "vidsrc":
+        return type === "movie"
+          ? `https://vidsrc.to/embed/movie/${id}`
+          : `https://vidsrc.to/embed/tv/${id}/${season}/${episode}`;
+      case "vidsrccc":
+        return type === "movie"
+          ? `https://vidsrc.cc/v2/embed/movie/${id}`
+          : `https://vidsrc.cc/v2/embed/tv/${id}/${season}/${episode}`;
+      case "vidsrcxyz":
+        return type === "movie"
+          ? `https://vidsrc.xyz/embed/movie/${id}`
+          : `https://vidsrc.xyz/embed/tv/${id}/${season}/${episode}`;
+      case "embedsu":
+        return type === "movie"
+          ? `https://embed.su/embed/movie/${id}`
+          : `https://embed.su/embed/tv/${id}/${season}/${episode}`;
+      default:
+        return "";
     }
   };
 
@@ -83,7 +94,7 @@ export default function VideoPlayer({
                 setServer("vidsrc");
                 setIsLoading(true);
               }}
-              className={`px-3 py-1 rounded-md transition-all font-medium cursor-pointer ${
+              className={`px-2.5 py-1 rounded-md transition-all font-medium cursor-pointer ${
                 server === "vidsrc"
                   ? "bg-rose-600 text-white shadow-md shadow-rose-600/10"
                   : "hover:text-zinc-200"
@@ -96,13 +107,39 @@ export default function VideoPlayer({
                 setServer("vidsrccc");
                 setIsLoading(true);
               }}
-              className={`px-3 py-1 rounded-md transition-all font-medium cursor-pointer ${
+              className={`px-2.5 py-1 rounded-md transition-all font-medium cursor-pointer ${
                 server === "vidsrccc"
                   ? "bg-rose-600 text-white shadow-md shadow-rose-600/10"
                   : "hover:text-zinc-200"
               }`}
             >
               Server 2
+            </button>
+            <button
+              onClick={() => {
+                setServer("vidsrcxyz");
+                setIsLoading(true);
+              }}
+              className={`px-2.5 py-1 rounded-md transition-all font-medium cursor-pointer ${
+                server === "vidsrcxyz"
+                  ? "bg-rose-600 text-white shadow-md shadow-rose-600/10"
+                  : "hover:text-zinc-200"
+              }`}
+            >
+              Server 3
+            </button>
+            <button
+              onClick={() => {
+                setServer("embedsu");
+                setIsLoading(true);
+              }}
+              className={`px-2.5 py-1 rounded-md transition-all font-medium cursor-pointer ${
+                server === "embedsu"
+                  ? "bg-rose-600 text-white shadow-md shadow-rose-600/10"
+                  : "hover:text-zinc-200"
+              }`}
+            >
+              Server 4
             </button>
           </div>
 
@@ -150,7 +187,12 @@ export default function VideoPlayer({
       <div className="h-10 border-t border-zinc-900 bg-zinc-950 px-6 flex items-center justify-between text-[10px] text-zinc-500">
         <span className="flex items-center gap-1.5">
           <Server className="w-3.5 h-3.5" />
-          Streaming source: {server === "vidsrc" ? "vidsrc.to" : "vidsrc.cc"}
+          Streaming source: {
+            server === "vidsrc" ? "vidsrc.to" : 
+            server === "vidsrccc" ? "vidsrc.cc" : 
+            server === "vidsrcxyz" ? "vidsrc.xyz" : 
+            "embed.su"
+          }
         </span>
         <span>Please use an ad-blocker for the best external playback experience.</span>
       </div>

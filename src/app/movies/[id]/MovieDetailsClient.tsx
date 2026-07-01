@@ -4,14 +4,16 @@ import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Play, Bookmark, BookmarkCheck, Star, Clock, Calendar, RefreshCw, X, ArrowLeft } from "lucide-react";
-import { MediaDetails, CastMember, getTMDBImageUrl } from "@/lib/tmdb";
+import { MediaDetails, CastMember, getTMDBImageUrl, MediaItem } from "@/lib/tmdb";
 import { useWatchlist } from "@/hooks/useWatchlist";
+import MediaRow from "@/components/streaming/MediaRow";
 
 interface MovieDetailsClientProps {
   id: number;
   rawId: string;
   initialDetails: MediaDetails;
   initialCast: CastMember[];
+  initialRecommendations: MediaItem[];
 }
 
 export default function MovieDetailsClient({
@@ -19,6 +21,7 @@ export default function MovieDetailsClient({
   rawId,
   initialDetails,
   initialCast,
+  initialRecommendations,
 }: MovieDetailsClientProps) {
   const router = useRouter();
   const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
@@ -375,6 +378,17 @@ export default function MovieDetailsClient({
           </div>
         </div>
       </div>
+
+      {/* Recommendations / Related Media */}
+      {initialRecommendations && initialRecommendations.length > 0 && (
+        <div className="border-t border-zinc-900 pt-8 -mx-4 sm:-mx-6 md:-mx-8">
+          <MediaRow
+            title="Recommended For You"
+            items={initialRecommendations}
+            type="movie"
+          />
+        </div>
+      )}
     </div>
   );
 }
