@@ -22,7 +22,7 @@ export default function Header() {
     if (e) e.preventDefault();
     if (!query.trim()) return;
     setIsOpen(false);
-    router.push(`/search?q=${encodeURIComponent(query.trim())}`);
+    router.push(`/movies?q=${encodeURIComponent(query.trim())}`);
   };
 
   // Debounced API Search Query
@@ -41,7 +41,7 @@ export default function Header() {
       try {
         const data = await tmdb.search(query, 1);
         const validResults = (data.results || []).filter(
-          (item) => item.media_type === "movie" || item.media_type === "tv"
+          (item) => item.media_type === "movie" || item.media_type === "tv",
         );
         setResults(validResults.slice(0, 5));
       } catch (err) {
@@ -96,8 +96,14 @@ export default function Header() {
 
       {/* Live Search Bar */}
       {hasKey && (
-        <div ref={searchContainerRef} className="relative flex-1 max-w-sm mx-4 sm:mx-8">
-          <form onSubmit={handleSearchSubmit} className="relative flex items-center">
+        <div
+          ref={searchContainerRef}
+          className="relative flex-1 max-w-sm mx-4 sm:mx-8"
+        >
+          <form
+            onSubmit={handleSearchSubmit}
+            className="relative flex items-center"
+          >
             <button
               type="submit"
               className="absolute left-3.5 text-zinc-500 hover:text-rose-500 transition-colors cursor-pointer"
@@ -128,7 +134,7 @@ export default function Header() {
 
           {/* Results Dropdown Overlay */}
           {isOpen && query.trim().length > 0 && (
-            <div className="absolute top-full left-0 right-0 mt-2 p-1.5 bg-zinc-950/95 border border-zinc-850 rounded-2xl shadow-xl shadow-black/80 z-50 backdrop-blur-xl animate-scale-in delay-0 max-h-96 overflow-y-auto no-scrollbar">
+            <div className="absolute top-full right-0 w-[290px] xs:w-[320px] sm:w-full mt-2 p-1.5 bg-zinc-950/95 border border-zinc-850 rounded-2xl shadow-xl shadow-black/80 z-50 backdrop-blur-xl animate-scale-in delay-0 max-h-96 overflow-y-auto no-scrollbar">
               {isLoading ? (
                 <div className="py-6 text-center text-xs text-zinc-500 flex items-center justify-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-bounce delay-0" />
@@ -136,12 +142,15 @@ export default function Header() {
                   <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-bounce delay-300" />
                 </div>
               ) : results.length === 0 ? (
-                <div className="py-4 text-center text-xs text-zinc-500">No results found</div>
+                <div className="py-4 text-center text-xs text-zinc-500">
+                  No results found
+                </div>
               ) : (
                 <div className="space-y-0.5">
                   {results.map((item) => {
                     const title = item.title || item.name || "Untitled";
-                    const type = item.media_type || (item.title ? "movie" : "tv");
+                    const type =
+                      item.media_type || (item.title ? "movie" : "tv");
                     const date = item.release_date || item.first_air_date || "";
                     const year = date ? new Date(date).getFullYear() : "N/A";
                     return (

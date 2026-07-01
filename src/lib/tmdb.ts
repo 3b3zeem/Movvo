@@ -15,6 +15,7 @@ export interface MediaItem {
   vote_average: number;
   vote_count: number;
   genre_ids: number[];
+  original_language?: string;
 }
 
 export interface CastMember {
@@ -169,6 +170,38 @@ export const tmdb = {
     }>("/search/multi", { query, page });
   },
 
+  // Search Movies specifically
+  searchMovies: async (
+    query: string,
+    page = 1,
+  ): Promise<{
+    results: MediaItem[];
+    total_pages: number;
+    total_results: number;
+  }> => {
+    return tmdbFetch<{
+      results: MediaItem[];
+      total_pages: number;
+      total_results: number;
+    }>("/search/movie", { query, page });
+  },
+
+  // Search TV Shows specifically
+  searchTV: async (
+    query: string,
+    page = 1,
+  ): Promise<{
+    results: MediaItem[];
+    total_pages: number;
+    total_results: number;
+  }> => {
+    return tmdbFetch<{
+      results: MediaItem[];
+      total_pages: number;
+      total_results: number;
+    }>("/search/tv", { query, page });
+  },
+
   // Get Detailed Info for Movie or TV Show
   getDetails: async (
     type: "movie" | "tv",
@@ -213,6 +246,8 @@ export const tmdb = {
       first_air_date_year?: string;
       sort_by?: string;
       page?: number;
+      with_original_language?: string;
+      without_original_language?: string;
     } = {},
   ): Promise<{
     results: MediaItem[];
@@ -225,6 +260,8 @@ export const tmdb = {
 
     if (params.with_genres) apiParams.with_genres = params.with_genres;
     if (params.sort_by) apiParams.sort_by = params.sort_by;
+    if (params.with_original_language) apiParams.with_original_language = params.with_original_language;
+    if (params.without_original_language) apiParams.without_original_language = params.without_original_language;
 
     if (type === "movie" && params.primary_release_year) {
       apiParams.primary_release_year = params.primary_release_year;
@@ -298,4 +335,18 @@ export const TV_GENRES = [
   { id: 10767, name: "Talk" },
   { id: 10768, name: "War & Politics" },
   { id: 37, name: "Western" },
+];
+
+export const LANGUAGE_OPTIONS = [
+  { value: "", label: "All Languages" },
+  { value: "en", label: "English" },
+  { value: "foreign", label: "Foreign (Non-English)" },
+  { value: "ar", label: "Arabic" },
+  { value: "hi", label: "Indian" },
+  { value: "ko", label: "Korean" },
+  { value: "tr", label: "Turkish" },
+  { value: "ja", label: "Japanese" },
+  { value: "fr", label: "French" },
+  { value: "es", label: "Spanish" },
+  { value: "it", label: "Italian" },
 ];

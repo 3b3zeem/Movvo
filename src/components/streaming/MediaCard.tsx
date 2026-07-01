@@ -1,9 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { Play, Star } from "lucide-react";
 import { MediaItem, getTMDBImageUrl, MOVIE_GENRES, TV_GENRES } from "@/lib/tmdb";
-import { useApp } from "@/context/AppContext";
 
 interface MediaCardProps {
   item: MediaItem;
@@ -11,8 +11,6 @@ interface MediaCardProps {
 }
 
 export default function MediaCard({ item, type }: MediaCardProps) {
-  const { openDetails } = useApp();
-  
   // Determine media type (fallback order: prop override -> item field -> default movie)
   const resolvedType = type || item.media_type || (item.title ? "movie" : "tv");
   const title = item.title || item.name || "Untitled";
@@ -29,14 +27,12 @@ export default function MediaCard({ item, type }: MediaCardProps) {
   // Recent releases get a 4K badge, others HD
   const isRecent = year && year >= 2023;
   
-  const handleCardClick = () => {
-    openDetails(resolvedType, item.id);
-  };
+  const href = `/${resolvedType === "movie" ? "movies" : "tv"}/${item.id}`;
 
   return (
-    <div
-      onClick={handleCardClick}
-      className="group/card relative flex-shrink-0 w-[150px] sm:w-48 bg-zinc-950 rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-3xl hover:shadow-rose-500/15 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] border border-zinc-900 hover:border-rose-500/30 select-none"
+    <Link
+      href={href}
+      className="group/card relative flex flex-col flex-shrink-0 w-[150px] sm:w-48 bg-zinc-950 rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-3xl hover:shadow-rose-500/15 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] border border-zinc-900 hover:border-rose-500/30 select-none"
     >
       {/* Poster Image Container */}
       <div className="relative aspect-[2/3] w-full overflow-hidden bg-zinc-900">
@@ -88,7 +84,7 @@ export default function MediaCard({ item, type }: MediaCardProps) {
       </div>
 
       {/* Details Box */}
-      <div className="p-3 bg-zinc-950 transition-colors duration-300">
+      <div className="p-3 bg-zinc-950 transition-colors duration-300 flex-1 flex flex-col justify-between">
         <h4 className="text-xs sm:text-sm font-bold text-zinc-200 truncate group-hover/card:text-rose-500 transition-colors duration-500 leading-snug">
           {title}
         </h4>
@@ -100,6 +96,6 @@ export default function MediaCard({ item, type }: MediaCardProps) {
           <span className="text-zinc-500">{yearDisplay}</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

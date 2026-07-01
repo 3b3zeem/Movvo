@@ -8,7 +8,6 @@ const MOBILE_NAV_ITEMS = [
   { label: "Home", href: "/", icon: Home },
   { label: "Movies", href: "/movies", icon: Film },
   { label: "TV Shows", href: "/tv", icon: Tv },
-  { label: "Search", href: "/search", icon: Search },
   { label: "Watchlist", href: "/watchlist", icon: Bookmark },
 ];
 
