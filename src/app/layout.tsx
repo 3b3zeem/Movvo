@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Movvo - Movies & TV Streaming Platform",
     description: "Watch your favorite movies and TV shows instantly with real-time API integrations and adaptive streaming players.",
-    url: "https://movvo-streaming.vercel.app",
+    url: "https://movvo-beta.vercel.app",
     siteName: "Movvo",
     images: [
       {
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     description: "Watch your favorite movies and TV shows instantly with real-time API integrations and adaptive streaming players.",
     images: ["/og-image.png"],
   },
-  metadataBase: new URL("https://movvo-streaming.vercel.app"),
+  metadataBase: new URL("https://movvo-beta.vercel.app"),
 };
 
 export default function RootLayout({
