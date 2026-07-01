@@ -22,6 +22,29 @@ export const metadata: Metadata = {
   description: "Watch your favorite movies and TV shows instantly with real-time API integrations and adaptive streaming players.",
   keywords: ["streaming", "movies", "tv shows", "movvo", "vidsrc", "tmdb"],
   authors: [{ name: "Movvo Inc." }],
+  openGraph: {
+    title: "Movvo - Movies & TV Streaming Platform",
+    description: "Watch your favorite movies and TV shows instantly with real-time API integrations and adaptive streaming players.",
+    url: "https://movvo-streaming.vercel.app",
+    siteName: "Movvo",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Movvo Streaming Platform Preview Banner",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Movvo - Movies & TV Streaming Platform",
+    description: "Watch your favorite movies and TV shows instantly with real-time API integrations and adaptive streaming players.",
+    images: ["/og-image.png"],
+  },
+  metadataBase: new URL("https://movvo-streaming.vercel.app"),
 };
 
 export default function RootLayout({
