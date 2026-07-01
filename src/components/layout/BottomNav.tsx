@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Film, Tv, Search, Bookmark } from "lucide-react";
+import { Home, Film, Tv, Search, Bookmark, Settings } from "lucide-react";
 
 const MOBILE_NAV_ITEMS = [
   { label: "Home", href: "/", icon: Home },
   { label: "Movies", href: "/movies", icon: Film },
   { label: "TV Shows", href: "/tv", icon: Tv },
   { label: "Watchlist", href: "/watchlist", icon: Bookmark },
+  { label: "Settings", href: "/settings", icon: Settings },
 ];
 
 export default function BottomNav() {

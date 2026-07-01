@@ -79,7 +79,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-30 w-full h-16 bg-zinc-950/70 backdrop-blur-md border-b border-zinc-900/40 flex items-center justify-between px-6 md:px-8">
+    <header className="sticky top-0 z-30 w-full h-16 bg-zinc-950/70 backdrop-blur-md border-b border-zinc-900/40 flex items-center justify-between px-2 md:px-8">
       {/* Mobile & Desktop Logo */}
       <div className="flex items-center">
         <Link href="/" className="flex items-center select-none h-8 w-fit">
@@ -134,7 +134,7 @@ export default function Header() {
 
           {/* Results Dropdown Overlay */}
           {isOpen && query.trim().length > 0 && (
-            <div className="absolute top-full right-0 w-[290px] xs:w-[320px] sm:w-full mt-2 p-1.5 bg-zinc-950/95 border border-zinc-850 rounded-2xl shadow-xl shadow-black/80 z-50 backdrop-blur-xl animate-scale-in delay-0 max-h-96 overflow-y-auto no-scrollbar">
+            <div className="absolute top-full -left-25 w-[290px] xs:w-[320px] sm:w-full mt-2 p-1.5 bg-zinc-950/95 border border-zinc-850 rounded-2xl shadow-xl shadow-black/80 z-50 backdrop-blur-xl animate-scale-in delay-0 max-h-96 overflow-y-auto no-scrollbar">
               {isLoading ? (
                 <div className="py-6 text-center text-xs text-zinc-500 flex items-center justify-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-bounce delay-0" />
@@ -213,14 +213,6 @@ export default function Header() {
               <span>API Key Required</span>
             </>
           )}
-        </Link>
-
-        {/* Settings button on mobile header */}
-        <Link
-          href="/settings"
-          className="p-2 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900 rounded-xl transition-all duration-300 md:hidden"
-        >
-          <Settings className="w-5 h-5" />
         </Link>
       </div>
     </header>
