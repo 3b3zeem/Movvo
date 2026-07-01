@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 100" fill="none">
+  <defs>
+    <linearGradient id="movvoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444" />
+      <stop offset="50%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+  </defs>
+  {/* Icon: Modern Play/M Hybrid */}
+  <path d="M20 20 L50 20 L75 55 L100 20 L130 20 L95 80 L55 80 Z" fill="url(#movvoGrad)" />
+  <polygon points="65,35 85,50 65,65" fill="#ffffff" />
+  {/* Text: Movvo */}
+  <text x="150" y="68" font-family="'Outfit', 'Inter', sans-serif" font-weight="900" font-size="54" fill="#ffffff" letter-spacing="1">
+    MOV<tspan fill="url(#movvoGrad)">VO</tspan>
+  </text>
+</svg>

@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎬 Movvo — Movies & TV Shows Streaming Platform
 
-## Getting Started
+Movvo is a state-of-the-art, high-performance streaming and media discovery platform built using **Next.js 16 (App Router)** and **Tailwind CSS v4**. It features an elegant glassmorphic dark interface, dynamic slider animations, dual-server high-speed video embeds, and a seamless global search system.
 
-First, run the development server:
+---
+
+## ✨ Features
+
+- **Premium Cinematographic UI**: Designed using custom HSL colors, modern typography, glassmorphism overlays, and fluid CSS-first micro-animations.
+- **Dual Streaming Servers**: Built-in player with Server 1 (`vidsrc.to`) and Server 2 (`vidsrc.cc`) for maximum stream availability.
+- **Unified Global Search**: A debounced instant search dropdown in the header that routes seamlessly to a dedicated search and filter page.
+- **Advanced Discovery filters**: Filter content by type (Movies/TV), genres, and release years using sleek `CustomSelect` dropdowns.
+- **Responsive Layout**: Sidebar-driven navigation optimized for mobile, tablet, and desktop viewports.
+- **Security-First Integration**: Relies on a single, secure environment variable configuration for TMDB integration, protecting against database tampering.
+
+---
+
+## ⚙️ Environment Configuration
+
+Movvo utilizes the **The Movie Database (TMDB) API** to fetch real-time metadata, posters, casts, and show episodes.
+
+### 1. Local Development (`.env.local`)
+Create a file named `.env.local` in the root directory of your project and configure your TMDB API Key:
+
+```env
+NEXT_PUBLIC_TMDB_API_KEY=your_tmdb_v3_api_key
+```
+
+> [!NOTE]
+> `.env.local` is included in `.gitignore` by default and will not be pushed to version control.
+
+### 2. Production Deployment (Vercel)
+You do **not** need to upload any `.env` files to your production hosting provider. Instead, configure it in Vercel's Dashboard:
+1. Go to your project settings in **Vercel**.
+2. Select **Environment Variables** from the sidebar.
+3. Add a new variable:
+   - **Key**: `NEXT_PUBLIC_TMDB_API_KEY`
+   - **Value**: *Your TMDB API Key*
+4. Click **Save** and trigger a deployment.
+
+---
+
+## 🚀 Getting Started
+
+First, install the project dependencies:
+
+```bash
+npm install
+```
+
+Second, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📦 Production Build
 
-## Learn More
+To generate an optimized production bundle, run:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This compiles all files, runs TypeScript validation checks, and exports optimized static pages. To preview the built production app, run:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run start
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛠️ Tech Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Core**: Next.js 16 (App Router, Turbopack)
+- **State Management**: React Context (`AppContext`)
+- **Styling**: Tailwind CSS v4 & Vanilla CSS (custom glassmorphism utility classes)
+- **Icons**: Lucide React
+- **API Engine**: TMDB API Client (`src/lib/tmdb.ts`)

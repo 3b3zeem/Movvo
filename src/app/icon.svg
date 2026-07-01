@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="movvoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444" />
+      <stop offset="50%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+  </defs>
+  <path d="M15 15 L38 15 L58 45 L78 15 L100 15 L70 85 L45 85 Z" fill="url(#movvoGrad)" />
+  <polygon points="48,32 63,45 48,58" fill="#ffffff" />
+</svg>
